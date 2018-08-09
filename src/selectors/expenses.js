@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 // Get visible expenses
 
 export default (expenses, { text, sortBy, startDate, endDate }) => {
@@ -6,8 +8,8 @@ export default (expenses, { text, sortBy, startDate, endDate }) => {
       return (
         (!text ||
           expense.description.toLowerCase().includes(text.toLowerCase())) &&
-        (!startDate || expense.createdAt >= startDate) &&
-        (!endDate || expense.createdAt <= endDate)
+        (!startDate || moment(expense.createdAt).isSameOrAfter(startDate)) &&
+        (!endDate || moment(expense.createdAt).isSameOrBefore(endDate))
       );
     })
     .sort((a, b) => {

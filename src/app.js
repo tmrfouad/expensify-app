@@ -20,19 +20,19 @@ const expense1 = {
   description: 'Water bill',
   notes: 'Water bill',
   amount: 4500,
-  createdAt: Date.parse('2018-07-11')
+  createdAt: Date.parse('2018-08-18')
 };
 const expense2 = {
   description: 'Gas bill',
   notes: 'Gas bill',
   amount: 80,
-  createdAt: Date.parse('2018-10-18')
+  createdAt: Date.parse('2018-08-27')
 };
 const expense3 = {
   description: 'Rent',
   notes: 'Rent',
   amount: 109500,
-  createdAt: Date.parse('2017-08-20')
+  createdAt: Date.parse('2018-08-11')
 };
 
 store.dispatch(addExpense(expense1));
