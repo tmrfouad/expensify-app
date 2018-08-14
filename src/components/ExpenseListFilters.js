@@ -9,18 +9,30 @@ import {
 } from '../actions/filters';
 import { DateRangePicker } from 'react-dates';
 
-class ExpenseListFilters extends React.Component {
+export class ExpenseListFilters extends React.Component {
   state = {
     createdAtfocusedInput: null
   };
 
   onCreatedAtChange = ({ startDate, endDate }) => {
-    this.props.dispatch(setStartDate(startDate));
-    this.props.dispatch(setEndDate(endDate));
+    this.props.setStartDate(startDate);
+    this.props.setEndDate(endDate);
   };
 
   onCreatedAtfocusChange = createdAtfocusedInput => {
     this.setState({ createdAtfocusedInput });
+  };
+
+  onTextFilterChange = e => {
+    this.props.setTextFilter(e.target.value);
+  };
+
+  onSortSelectChange = e => {
+    if (e.target.value === 'date') {
+      this.props.sortByDate();
+    } else if (e.target.value === 'amount') {
+      this.props.sortByAmount();
+    }
   };
 
   render() {
@@ -29,31 +41,23 @@ class ExpenseListFilters extends React.Component {
         <input
           type="text"
           value={this.props.filters.text}
-          onChange={e => {
-            this.props.dispatch(setTextFilter(e.target.value));
-          }}
+          onChange={this.onTextFilterChange}
         />
         <select
           value={this.props.filters.sortBy}
-          onChange={e => {
-            if (e.target.value === 'date') {
-              this.props.dispatch(sortByDate());
-            } else if (e.target.value === 'amount') {
-              this.props.dispatch(sortByAmount());
-            }
-          }}
+          onChange={this.onSortSelectChange}
         >
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
         <DateRangePicker
-          startDate={this.props.filters.startDate} // momentPropTypes.momentObj or null,
-          startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-          endDate={this.props.filters.endDate} // momentPropTypes.momentObj or null,
-          endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-          onDatesChange={this.onCreatedAtChange} // PropTypes.func.isRequired,
-          focusedInput={this.state.createdAtfocusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={this.onCreatedAtfocusChange} // PropTypes.func.isRequired,
+          startDate={this.props.filters.startDate}
+          startDateId="your_unique_start_date_id"
+          endDate={this.props.filters.endDate}
+          endDateId="your_unique_end_date_id"
+          onDatesChange={this.onCreatedAtChange}
+          focusedInput={this.state.createdAtfocusedInput}
+          onFocusChange={this.onCreatedAtfocusChange}
           isOutsideRange={() => false}
           numberOfMonths={1}
           showClearDates={true}
@@ -67,4 +71,15 @@ const mapStateToProps = state => ({
   filters: state.filters
 });
 
-export default connect(mapStateToProps)(ExpenseListFilters);
+const mapDispatchToProps = dispatch => ({
+  setStartDate: startDate => dispatch(setStartDate(startDate)),
+  setEndDate: endDate => dispatch(setEndDate(endDate)),
+  setTextFilter: text => dispatch(setTextFilter(text)),
+  sortByDate: () => dispatch(sortByDate()),
+  sortByAmount: () => dispatch(sortByAmount())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExpenseListFilters);
