@@ -23,4 +23,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-
+public/bundle.js
+public/bundle.js.map
+public/styles.css
+public/styles.css.map
