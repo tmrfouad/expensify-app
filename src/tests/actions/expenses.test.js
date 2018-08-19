@@ -90,7 +90,7 @@ test('generate edit expense action', () => {
 test('should edit expense data on firebase', done => {
   const store = createMockStore({});
   const id = expenses[0].id;
-  const expense = { ...expenses[0], notes: 'new notes' };
+  const expense = { notes: 'new notes' };
   store
     .dispatch(startEditExpense({ id }, expense))
     .then(() => {
@@ -104,7 +104,7 @@ test('should edit expense data on firebase', done => {
       return database.ref(`expenses/${id}`).once('value');
     })
     .then(snap => {
-      expect(snap.val()).toEqual(expense);
+      expect(snap.val().notes).toBe(expense.notes);
       done();
     });
 });
