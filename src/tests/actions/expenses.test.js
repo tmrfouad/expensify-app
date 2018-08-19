@@ -5,7 +5,8 @@ import {
   removeExpense,
   setExpenses,
   startSetExpenses,
-  startRemoveExpense
+  startRemoveExpense,
+  startEditExpense
 } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import configureMockStore from 'redux-mock-store';
@@ -14,6 +15,7 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
+// prepair pre test data
 beforeEach(done => {
   const expensesData = {};
   expenses.forEach(({ id, description, amount, notes, createdAt }) => {
@@ -43,19 +45,22 @@ test('generate remove expense action', () => {
 
 test('should remove an expense from firebase', done => {
   const store = createMockStore({});
-  const id = '1';
-  store.dispatch(startRemoveExpense({ id })).then(() => {
-    const actions = store.getActions();
-    expect(actions[0]).toEqual({
-      type: 'REMOVE_EXPENSE',
-      id
-    });
+  const id = expenses[0].id;
+  store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id
+      });
 
-    database.ref(`expenses/${id}`).once('value', snap => {
-      expect(snap.val()).toBeNull();
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then(snap => {
+      expect(snap.val()).toBeFalsy();
       done();
     });
-  });
 });
 
 // EDIT_EXPENSE
@@ -80,6 +85,28 @@ test('generate edit expense action', () => {
       createdAt: 10000
     }
   });
+});
+
+test('should edit expense data on firebase', done => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const expense = { ...expenses[0], notes: 'new notes' };
+  store
+    .dispatch(startEditExpense({ id }, expense))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'EDIT_EXPENSE',
+        id,
+        expense
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then(snap => {
+      expect(snap.val()).toEqual(expense);
+      done();
+    });
 });
 
 // ADD_EXPENSE
