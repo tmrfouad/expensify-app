@@ -45,3 +45,21 @@ export const editExpense = ({ id } = {}, expense) => ({
   id,
   expense
 });
+
+// SET_EXPENSES
+export const setExpenses = expenses => ({ type: 'SET_EXPENSES', expenses });
+
+export const startSetExpenses = () => {
+  return dispatch => {
+    return database.ref('expenses').once('value', snap => {
+      const expenses = [];
+      snap.forEach(childSnap => {
+        expenses.push({
+          id: childSnap.key,
+          ...childSnap.val()
+        });
+      });
+      dispatch(setExpenses(expenses));
+    });
+  };
+};
