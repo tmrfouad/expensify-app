@@ -35,9 +35,7 @@ export class EditExpensePage extends React.Component {
       <div>
         <div className="page-header">
           <div className="content-container">
-            <h2 className="page-header__title">
-              Edit Expense: <span>{this.props.expense.id}</span>
-            </h2>
+            <h2 className="page-header__title">Edit Expense</h2>
           </div>
         </div>
         <div className="content-container">

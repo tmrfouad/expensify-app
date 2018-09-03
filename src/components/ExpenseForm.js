@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
+import { connect } from 'react-redux';
+import { startSetExpenseTypes } from '../actions/expense-types';
 
-export default class ExpenseForm extends React.Component {
+export class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     const expense = props.expense;
@@ -61,18 +63,29 @@ export default class ExpenseForm extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.props.startSetExpenseTypes();
+  }
+
   render() {
     return (
       <form className="form" onSubmit={this.onSubmit}>
         {this.state.error && <p className="form__error">{this.state.error}</p>}
-        <input
-          type="text"
-          className="text-input"
-          placeholder="Description"
+        <select
+          className="select"
           autoFocus
           value={this.state.description}
           onChange={this.onDescriptionChange}
-        />
+        >
+          <option value="" disabled>
+            [Select Description]
+          </option>
+          {this.props.expenseTypes.map(expType => (
+            <option key={expType.id} value={expType.description}>
+              {expType.description}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           className="text-input"
@@ -103,3 +116,16 @@ export default class ExpenseForm extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  expenseTypes: state.expenseTypes
+});
+
+const mapDispatchToProps = dispatch => ({
+  startSetExpenseTypes: () => dispatch(startSetExpenseTypes())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExpenseForm);

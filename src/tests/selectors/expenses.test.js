@@ -4,13 +4,13 @@ import expenses from '../fixtures/expenses';
 
 test('filter by text value', () => {
   const filters = {
-    text: 'e',
+    text: '1',
     sortBy: 'date',
     startDate: undefined,
     endDate: undefined
   };
   const result = selectExpenses(expenses, filters);
-  expect(result).toEqual([expenses[2], expenses[3], expenses[0]]);
+  expect(result).toEqual([expenses[0]]);
 });
 
 test('filter by start date', () => {

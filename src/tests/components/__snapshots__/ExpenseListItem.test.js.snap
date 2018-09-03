@@ -10,7 +10,7 @@ exports[`should render expense list item with expense 1`] = `
     <h3
       className="list-item__title"
     >
-      Water bill
+      Expense 1
     </h3>
     <span
       className="list-item__sub-title"

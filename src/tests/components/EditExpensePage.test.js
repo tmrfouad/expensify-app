@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditExpensePage } from '../../components/EditExpensePage';
+import { ExpenseForm } from '../../components/ExpenseForm';
 import expenses from '../fixtures/expenses';
 
 let startEditExpense, startRemoveExpense, history, wrapper, expense;
@@ -30,7 +31,7 @@ test('should render EditExpensePage correctly', () => {
 });
 
 test('should handle startEditExpense', () => {
-  wrapper.find('ExpenseForm').prop('onSubmit')(expense);
+  wrapper.find(ExpenseForm).prop('onSubmit')(expense);
   expect(startEditExpense).toHaveBeenLastCalledWith(expenses[0].id, expense);
   expect(history.push).toHaveBeenLastCalledWith('/');
 });
