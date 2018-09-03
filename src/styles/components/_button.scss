@@ -10,6 +10,24 @@
   text-decoration: none;
 }
 
+.button--full-width {
+  width: 100%;
+}
+
+.button--xs-margin {
+  margin: $xs-size;
+}
+
+.button--xs-margin-y {
+  margin-top: $xs-size;
+  margin-bottom: $xs-size;
+}
+
+.button--xs-margin-x {
+  margin-left: $xs-size;
+  margin-right: $xs-size;
+}
+
 .button--link {
   background: none;
 }

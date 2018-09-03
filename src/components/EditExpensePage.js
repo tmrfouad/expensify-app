@@ -1,6 +1,6 @@
 import React from 'react';
 import ExpenseForm from './ExpenseForm';
-import RemoveExpenseModal from './RemoveExpenseModal';
+import ConfirmModal from './ConfirmModal';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 import { connect } from 'react-redux';
 
@@ -49,11 +49,10 @@ export class EditExpensePage extends React.Component {
             Remove Expense
           </button>
         </div>
-        <RemoveExpenseModal
-          messageTitle="Test Title"
-          messageBody="Test Body"
+        <ConfirmModal
+          messageTitle="Remove Expense!"
+          messageBody="Are you sure you want to remove this item?"
           isOpen={this.state.isModalOpen}
-          result={this.state.result}
           onModalClose={this.closeDialog}
           onModalOk={this.onRemoveExpense}
         />
