@@ -17,7 +17,7 @@ export class AddExpensePage extends React.Component {
           </div>
         </div>
         <div className="content-container">
-          <ExpenseForm onSubmit={this.onSubmit} />
+          <ExpenseForm id="expenseForm" onSubmit={this.onSubmit} />
         </div>
       </div>
     );

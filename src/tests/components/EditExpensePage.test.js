@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditExpensePage } from '../../components/EditExpensePage';
-import { ExpenseForm } from '../../components/ExpenseForm';
 import expenses from '../fixtures/expenses';
 
 let startEditExpense, startRemoveExpense, history, wrapper, expense;
@@ -31,13 +30,21 @@ test('should render EditExpensePage correctly', () => {
 });
 
 test('should handle startEditExpense', () => {
-  wrapper.find(ExpenseForm).prop('onSubmit')(expense);
+  wrapper.find('#expenseForm').prop('onSubmit')(expense);
   expect(startEditExpense).toHaveBeenLastCalledWith(expenses[0].id, expense);
   expect(history.push).toHaveBeenLastCalledWith('/');
 });
 
-test('should handle startRemoveExpense', () => {
+test('should handle startRemoveExpense on dialog ok', () => {
   wrapper.find('button').simulate('click');
+  wrapper.find('#confirmModal').prop('onModalOk')();
   expect(startRemoveExpense).toHaveBeenLastCalledWith(expenses[0].id);
   expect(history.push).toHaveBeenLastCalledWith('/');
+});
+
+test('should not handle startRemoveExpense on dialog cancel', () => {
+  wrapper.find('button').simulate('click');
+  wrapper.find('#confirmModal').prop('onModalClose')();
+  expect(startRemoveExpense).not.toHaveBeenCalled();
+  expect(history.push).not.toHaveBeenCalled();
 });

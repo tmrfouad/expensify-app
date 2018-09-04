@@ -19,6 +19,7 @@ exports[`should rnder AddExpensePage correctly 1`] = `
     className="content-container"
   >
     <Connect(ExpenseForm)
+      id="expenseForm"
       onSubmit={[Function]}
     />
   </div>

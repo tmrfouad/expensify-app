@@ -28,6 +28,7 @@ exports[`should render EditExpensePage correctly 1`] = `
           "notes": "Water bill",
         }
       }
+      id="expenseForm"
       onSubmit={[Function]}
     />
     <button
@@ -38,6 +39,7 @@ exports[`should render EditExpensePage correctly 1`] = `
     </button>
   </div>
   <ConfirmModal
+    id="confirmModal"
     isOpen={false}
     messageBody="Are you sure you want to remove this item?"
     messageTitle="Remove Expense!"

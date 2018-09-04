@@ -39,7 +39,11 @@ export class EditExpensePage extends React.Component {
           </div>
         </div>
         <div className="content-container">
-          <ExpenseForm expense={this.props.expense} onSubmit={this.onSubmit} />
+          <ExpenseForm
+            id="expenseForm"
+            expense={this.props.expense}
+            onSubmit={this.onSubmit}
+          />
           <button
             className="button button--secondary"
             onClick={this.openDialog}
@@ -48,6 +52,7 @@ export class EditExpensePage extends React.Component {
           </button>
         </div>
         <ConfirmModal
+          id="confirmModal"
           messageTitle="Remove Expense!"
           messageBody="Are you sure you want to remove this item?"
           isOpen={this.state.isModalOpen}
