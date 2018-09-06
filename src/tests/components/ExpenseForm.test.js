@@ -36,7 +36,7 @@ test('should render error for invalid form submission', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('should set description on input change', () => {
+test('should set description on select change', () => {
   const value = expenseTypes[1].description;
   wrapper.find('select').simulate('change', { target: { value: value } });
   expect(wrapper.state('description')).toBe(value);

@@ -1,12 +1,12 @@
 import {
-  startAddExpense,
   addExpense,
+  startAddExpense,
   editExpense,
+  startEditExpense,
   removeExpense,
-  setExpenses,
-  startSetExpenses,
   startRemoveExpense,
-  startEditExpense
+  setExpenses,
+  startSetExpenses
 } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import configureMockStore from 'redux-mock-store';

@@ -5,6 +5,7 @@ class ConfirmModal extends React.Component {
   render() {
     return (
       <Modal
+        id="modal"
         isOpen={!!this.props.isOpen}
         onRequestClose={this.props.onModalClose}
         contentLabel="Selected Option"
