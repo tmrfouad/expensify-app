@@ -1,7 +1,8 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import LoginPage from '../components/LoginPage';
 import ExpenseDashbourdPage from '../components/ExpenseDashbourdPage';
+import ExpenseTypesPage from '../components/ExpenseTypesPage';
 import AddExpensePage from '../components/AddExpensePage';
 import EditExpensePage from '../components/EditExpensePage';
 import PublicRoute from './PublicRoute';
@@ -19,6 +20,7 @@ const AppRouter = () => (
         <PrivateRoute path="/dashboard" component={ExpenseDashbourdPage} />
         <PrivateRoute path="/create" component={AddExpensePage} />
         <PrivateRoute path="/edit/:id" component={EditExpensePage} />
+        <PrivateRoute path="/expensetypes" component={ExpenseTypesPage} />
         <PublicRoute component={NotFoundPage} />
       </Switch>
     </div>
