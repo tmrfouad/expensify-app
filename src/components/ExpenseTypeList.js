@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseTypeListItem from './ExpenseTypeListItem';
-import { startSetExpenseTypes } from '../actions/expense-types';
+import { Link } from 'react-router-dom';
 
 export class ExpenseTypeList extends React.Component {
-  componentDidMount() {
-    this.props.startSetExpenseTypes();
-  }
-
   render() {
     return (
       <div>
         <div className="page-header">
           <div className="content-container">
             <h2 className="page-header__title">Expense Types</h2>
+            <div className="page-header__actions">
+              <Link className="button" to="/expensetypeform">
+                Add Expense Type
+              </Link>
+            </div>
           </div>
         </div>
         <div className="content-container">
@@ -35,11 +36,4 @@ const mapStateToProps = state => ({
   expenseTypes: state.expenseTypes
 });
 
-const mapDispatchToProps = dispatch => ({
-  startSetExpenseTypes: () => dispatch(startSetExpenseTypes())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExpenseTypeList);
+export default connect(mapStateToProps)(ExpenseTypeList);

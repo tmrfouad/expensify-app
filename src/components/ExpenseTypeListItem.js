@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ExpenseTypeList = ({ id, description }) => (
-  <Link className="list-item" to={`/edit/${id}`}>
+  <Link className="list-item" to={`/expensetypeform/${id}`}>
     <div>
       <h3 className="list-item__title">{description}</h3>
     </div>
