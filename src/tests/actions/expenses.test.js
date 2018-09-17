@@ -20,8 +20,9 @@ const uid = '123Test';
 const defaultAuthState = { auth: { uid } };
 beforeEach(done => {
   const expensesData = {};
-  expenses.forEach(({ id, description, amount, notes, createdAt }) => {
+  expenses.forEach(({ id, account, description, amount, notes, createdAt }) => {
     expensesData[id] = {
+      account,
       description,
       amount,
       notes,
@@ -70,6 +71,10 @@ test('generate edit expense action', () => {
   const result = editExpense(
     { id: '1' },
     {
+      account: {
+        id: '1',
+        name: 'Account 1'
+      },
       description: 'test description',
       notes: 'test notes',
       amount: 100,
@@ -80,7 +85,11 @@ test('generate edit expense action', () => {
   expect(result).toEqual({
     type: 'EDIT_EXPENSE',
     id: '1',
-    expense: {
+    updates: {
+      account: {
+        id: '1',
+        name: 'Account 1'
+      },
       description: 'test description',
       notes: 'test notes',
       amount: 100,
@@ -92,21 +101,21 @@ test('generate edit expense action', () => {
 test('should edit expense data on firebase', done => {
   const store = createMockStore(defaultAuthState);
   const id = expenses[0].id;
-  const expense = { notes: 'new notes' };
+  const updates = { notes: 'new notes' };
   store
-    .dispatch(startEditExpense({ id }, expense))
+    .dispatch(startEditExpense({ id }, updates))
     .then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: 'EDIT_EXPENSE',
         id,
-        expense
+        updates
       });
 
       return database.ref(`users/${uid}/expenses/${id}`).once('value');
     })
     .then(snap => {
-      expect(snap.val().notes).toBe(expense.notes);
+      expect(snap.val().notes).toBe(updates.notes);
       done();
     });
 });
@@ -126,6 +135,10 @@ test('generate add expense action using specific values', () => {
 test('should add expense to database with provided values', done => {
   const store = createMockStore(defaultAuthState);
   const expenseData = {
+    account: {
+      id: '1',
+      name: 'Account 1'
+    },
     description: 'Mouse',
     amount: 3500,
     notes: 'new mouse',
@@ -156,6 +169,10 @@ test('should add expense to database with provided values', done => {
 test('should add expense to database with default values', done => {
   const store = createMockStore(defaultAuthState);
   const defaultExpenseData = {
+    account: {
+      id: '',
+      name: ''
+    },
     description: '',
     notes: '',
     amount: 0,

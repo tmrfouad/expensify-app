@@ -1,60 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  startAddExpenseType,
-  startEditExpenseType,
-  startSetExpenseTypes,
-  startRemoveExpenseType
-} from '../actions/expense-types';
+  startAddAccount,
+  startEditAccount,
+  startSetAccounts,
+  startRemoveAccount
+} from '../actions/accounts';
 import ConfirmModal from './ConfirmModal';
 
-export class ExpenseTypeForm extends React.Component {
+export class AccountForm extends React.Component {
   constructor(props) {
     super(props);
-    const expenseType = this.props.expenseType;
+    const account = this.props.account;
     this.state = {
-      description: expenseType ? expenseType.description : '',
+      name: account ? account.name : '',
       error: undefined,
-      mode: expenseType ? 'edit' : 'add',
+      mode: account ? 'edit' : 'add',
       isModalOpen: false
     };
   }
 
-  onDescriptionChange = e => {
-    this.setState({ description: e.target.value });
+  onNameChange = e => {
+    this.setState({ name: e.target.value });
   };
 
   onFormSubmit = e => {
     e.preventDefault();
-    if (!this.state.description) {
-      this.setState({ error: 'Please enter a description!' });
+    if (!this.state.name) {
+      this.setState({ error: 'Please enter a name!' });
     } else {
-      this.props.startSetExpenseTypes().then(() => {
-        if (
-          this.props.expenseTypes.find(
-            exType => exType.description === this.state.description
-          )
-        ) {
+      this.props.startSetAccounts().then(() => {
+        if (this.props.accounts.find(acc => acc.name === this.state.name)) {
           this.setState({ error: 'This expense type already exists!' });
         } else {
           if (this.state.mode === 'edit') {
-            this.props.startEditExpenseType(this.props.match.params.id, {
-              description: this.state.description
+            this.props.startEditAccount(this.props.match.params.id, {
+              name: this.state.name
             });
           } else {
-            this.props.startAddExpenseType({
-              description: this.state.description
+            this.props.startAddAccount({
+              name: this.state.name
             });
           }
-          this.props.history.push('/expensetypes');
+          this.props.history.push('/accounts');
         }
       });
     }
   };
 
-  removeExpenseType = () => {
-    this.props.startRemoveExpenseType(this.props.match.params.id);
-    this.props.history.push('/expensetypes');
+  removeAccount = () => {
+    this.props.startRemoveAccount(this.props.match.params.id);
+    this.props.history.push('/accounts');
   };
 
   openRemoveItemDialog = e => {
@@ -83,8 +79,8 @@ export class ExpenseTypeForm extends React.Component {
           <input
             type="text"
             className="text-input"
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
+            value={this.state.name}
+            onChange={this.onNameChange}
           />
           <div>
             <button className="button form__action">Save Expense Type</button>
@@ -102,7 +98,7 @@ export class ExpenseTypeForm extends React.Component {
           messageBody="Are you sure you want to remove this item?"
           isOpen={this.state.isModalOpen}
           onModalClose={this.closeRemoveItemDialog}
-          onModalOk={this.removeExpenseType}
+          onModalOk={this.removeAccount}
         />
       </div>
     );
@@ -110,26 +106,26 @@ export class ExpenseTypeForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  expenseType: state.expenseTypes.find(t => t.id === props.match.params.id),
-  expenseTypes: state.expenseTypes
+  account: state.accounts.find(t => t.id === props.match.params.id),
+  accounts: state.accounts
 });
 
 const mapDispatchToProps = dispatch => ({
-  startAddExpenseType: expenseType => {
-    dispatch(startAddExpenseType(expenseType));
+  startAddAccount: account => {
+    dispatch(startAddAccount(account));
   },
-  startEditExpenseType: (id, expenseType) => {
-    dispatch(startEditExpenseType({ id }, expenseType));
+  startEditAccount: (id, account) => {
+    dispatch(startEditAccount({ id }, account));
   },
-  startRemoveExpenseType: id => {
-    dispatch(startRemoveExpenseType({ id }));
+  startRemoveAccount: id => {
+    dispatch(startRemoveAccount({ id }));
   },
-  startSetExpenseTypes: () => {
-    return dispatch(startSetExpenseTypes());
+  startSetAccounts: () => {
+    return dispatch(startSetAccounts());
   }
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ExpenseTypeForm);
+)(AccountForm);

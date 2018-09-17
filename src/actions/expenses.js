@@ -10,6 +10,10 @@ export const startAddExpense = (expenseData = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     const {
+      account = {
+        id: '',
+        name: ''
+      },
       description = '',
       notes = '',
       amount = 0,
@@ -17,6 +21,7 @@ export const startAddExpense = (expenseData = {}) => {
     } = expenseData;
 
     const expense = {
+      account,
       description,
       notes,
       amount,
@@ -52,20 +57,20 @@ export const startRemoveExpense = ({ id } = {}) => {
 };
 
 // EDIT_EXPENSE
-export const editExpense = ({ id } = {}, expense) => ({
+export const editExpense = ({ id } = {}, updates) => ({
   type: 'EDIT_EXPENSE',
   id,
-  expense
+  updates
 });
 
-export const startEditExpense = ({ id } = {}, expense) => {
+export const startEditExpense = ({ id } = {}, updates) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     return database
       .ref(`users/${uid}/expenses/${id}`)
-      .update(expense)
+      .update(updates)
       .then(() => {
-        dispatch(editExpense({ id }, expense));
+        dispatch(editExpense({ id }, updates));
       });
   };
 };

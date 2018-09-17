@@ -11,7 +11,7 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
-import { startSetExpenseTypes } from './actions/expense-types';
+import { startSetAccounts } from './actions/accounts';
 
 const store = configureStore();
 const jsx = (
@@ -35,7 +35,7 @@ firebase.auth().onAuthStateChanged(user => {
     store
       .dispatch(startSetExpenses())
       .then(() => {
-        return store.dispatch(startSetExpenseTypes());
+        return store.dispatch(startSetAccounts());
       })
       .then(() => {
         renderApp();

@@ -27,6 +27,10 @@ test('do not remove expense if id not found', () => {
 test('add expense', () => {
   const newExpense = {
     id: '5',
+    account: {
+      id: '5',
+      name: 'Gum Acc'
+    },
     description: 'Gum',
     notes: 'Gum',
     amount: 250,
@@ -45,10 +49,10 @@ test('edit existing expense', () => {
   const action = {
     type: 'EDIT_EXPENSE',
     id: expenses[0].id,
-    expense: { description }
+    updates: { description }
   };
   const state = expensesReducer(expenses, action);
-  expect(state[0].description).toBe('Water bill test');
+  expect(state[0].description).toBe(description);
 });
 
 test('do not edit non existing expense', () => {
@@ -56,7 +60,7 @@ test('do not edit non existing expense', () => {
   const action = {
     type: 'EDIT_EXPENSE',
     id: '-1',
-    expense: { description }
+    updates: { description }
   };
   const state = expensesReducer(expenses, action);
   expect(state).toEqual(expenses);

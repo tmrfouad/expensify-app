@@ -64,6 +64,12 @@ exports[`should render expense list with expenses 1`] = `
     className="list-body"
   >
     <ExpenseListItem
+      account={
+        Object {
+          "id": "1",
+          "name": "Account 1",
+        }
+      }
       amount={30000}
       createdAt={2000}
       description="Expense 1"
@@ -72,6 +78,12 @@ exports[`should render expense list with expenses 1`] = `
       notes="Water bill"
     />
     <ExpenseListItem
+      account={
+        Object {
+          "id": "2",
+          "name": "Account 2",
+        }
+      }
       amount={20000}
       createdAt={1000}
       description="Expense 2"
@@ -80,6 +92,12 @@ exports[`should render expense list with expenses 1`] = `
       notes="Gas bill"
     />
     <ExpenseListItem
+      account={
+        Object {
+          "id": "3",
+          "name": "Account 3",
+        }
+      }
       amount={40000}
       createdAt={4000}
       description="Expense 3"
@@ -88,6 +106,12 @@ exports[`should render expense list with expenses 1`] = `
       notes="Apartment Rent"
     />
     <ExpenseListItem
+      account={
+        Object {
+          "id": "4",
+          "name": "Account 4",
+        }
+      }
       amount={10000}
       createdAt={3000}
       description="Expense 4"

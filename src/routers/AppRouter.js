@@ -2,8 +2,8 @@ import React from 'react';
 import { Router, Switch } from 'react-router-dom';
 import LoginPage from '../components/LoginPage';
 import ExpenseDashbourdPage from '../components/ExpenseDashbourdPage';
-import ExpenseTypesPage from '../components/ExpenseTypesPage';
-import ExpenseTypesForm from '../components/ExpenseTypeForm';
+import AccountsPage from '../components/AccountsPage';
+import AccountForm from '../components/AccountForm';
 import AddExpensePage from '../components/AddExpensePage';
 import EditExpensePage from '../components/EditExpensePage';
 import PublicRoute from './PublicRoute';
@@ -21,12 +21,9 @@ const AppRouter = () => (
         <PrivateRoute path="/dashboard" component={ExpenseDashbourdPage} />
         <PrivateRoute path="/create" component={AddExpensePage} />
         <PrivateRoute path="/edit/:id" component={EditExpensePage} />
-        <PrivateRoute path="/expensetypes" component={ExpenseTypesPage} />
-        <PrivateRoute
-          path="/expensetypeform/:id"
-          component={ExpenseTypesForm}
-        />
-        <PrivateRoute path="/expensetypeform" component={ExpenseTypesForm} />
+        <PrivateRoute path="/accounts" component={AccountsPage} />
+        <PrivateRoute path="/accountform/:id" component={AccountForm} />
+        <PrivateRoute path="/accountform" component={AccountForm} />
         <PublicRoute component={NotFoundPage} />
       </Switch>
     </div>

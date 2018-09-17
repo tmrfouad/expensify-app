@@ -21,6 +21,10 @@ exports[`should render EditExpensePage correctly 1`] = `
     <Connect(ExpenseForm)
       expense={
         Object {
+          "account": Object {
+            "id": "1",
+            "name": "Account 1",
+          },
           "amount": 30000,
           "createdAt": 2000,
           "description": "Expense 1",

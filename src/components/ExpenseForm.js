@@ -2,13 +2,18 @@ import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import { connect } from 'react-redux';
-import { startSetExpenseTypes } from '../actions/expense-types';
 
 export class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     const expense = props.expense;
     this.state = {
+      account: expense
+        ? expense.account
+        : {
+            id: '',
+            name: ''
+          },
       description: expense ? expense.description : '',
       notes: expense ? expense.notes : '',
       amount: expense ? (expense.amount / 100).toString() : '',
@@ -18,6 +23,12 @@ export class ExpenseForm extends React.Component {
       mode: expense ? 'edit' : 'add'
     };
   }
+
+  onAccountChange = e => {
+    const id = e.target.value;
+    const account = this.props.accounts.find(acc => acc.id === id);
+    this.setState(() => ({ account, description: account.name }));
+  };
 
   onDescriptionChange = e => {
     const description = e.target.value;
@@ -48,13 +59,14 @@ export class ExpenseForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if (!this.state.description || !this.state.amount) {
+    if (!this.state.account || !this.state.description || !this.state.amount) {
       this.setState(() => ({
-        error: 'Please provide description and amount.'
+        error: 'Please provide account, description and amount.'
       }));
     } else {
       this.setState(() => ({ error: '' }));
       this.props.onSubmit({
+        account: this.state.account,
         description: this.state.description,
         amount: parseFloat(this.state.amount) * 100,
         createdAt: this.state.createdAt.valueOf(),
@@ -63,10 +75,6 @@ export class ExpenseForm extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.props.startSetExpenseTypes();
-  }
-
   render() {
     return (
       <form className="form" onSubmit={this.onSubmit}>
@@ -74,18 +82,25 @@ export class ExpenseForm extends React.Component {
         <select
           className="select"
           autoFocus
-          value={this.state.description}
-          onChange={this.onDescriptionChange}
+          value={this.state.account.id}
+          onChange={this.onAccountChange}
         >
           <option value="" disabled>
-            [Select Description]
+            -- Select Account --
           </option>
-          {this.props.expenseTypes.map(expType => (
-            <option key={expType.id} value={expType.description}>
-              {expType.description}
+          {this.props.accounts.map(acc => (
+            <option key={acc.id} value={acc.id}>
+              {acc.name}
             </option>
           ))}
         </select>
+        <input
+          type="text"
+          className="text-input"
+          placeholder="Description"
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+        />
         <input
           type="text"
           className="text-input"
@@ -118,14 +133,7 @@ export class ExpenseForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  expenseTypes: state.expenseTypes
+  accounts: state.accounts
 });
 
-const mapDispatchToProps = dispatch => ({
-  startSetExpenseTypes: () => dispatch(startSetExpenseTypes())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExpenseForm);
+export default connect(mapStateToProps)(ExpenseForm);

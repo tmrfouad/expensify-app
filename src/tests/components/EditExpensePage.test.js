@@ -18,6 +18,7 @@ beforeEach(() => {
     />
   );
   expense = {
+    account: expenses[0].account,
     description: expenses[0].description,
     amount: expenses[0].amount,
     createdAt: expenses[0].createdAt,

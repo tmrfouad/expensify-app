@@ -11,7 +11,7 @@ export const Header = ({ startLogout }) => (
           <h1>Expensify</h1>
         </Link>
         <div>
-          <Link className="button button--link" to="/expensetypes">
+          <Link className="button button--link" to="/accounts">
             Expense Types
           </Link>
           <button className="button button--link" onClick={startLogout}>

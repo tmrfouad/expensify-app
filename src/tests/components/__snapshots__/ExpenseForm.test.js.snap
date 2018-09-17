@@ -15,33 +15,40 @@ exports[`should render error for invalid form submission 1`] = `
       disabled={true}
       value=""
     >
-      [Select Description]
+      -- Select Account --
     </option>
     <option
       key="1"
-      value="Expense 1"
+      value="1"
     >
-      Expense 1
+      Account 1
     </option>
     <option
       key="2"
-      value="Expense 2"
+      value="2"
     >
-      Expense 2
+      Account 2
     </option>
     <option
       key="3"
-      value="Expense 3"
+      value="3"
     >
-      Expense 3
+      Account 3
     </option>
     <option
       key="4"
-      value="Expense 4"
+      value="4"
     >
-      Expense 4
+      Account 4
     </option>
   </select>
+  <input
+    className="text-input"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value=""
+  />
   <input
     className="text-input"
     onChange={[Function]}
@@ -161,7 +168,7 @@ exports[`should render error for invalid form submission 2`] = `
   <p
     className="form__error"
   >
-    Please provide description and amount.
+    Please provide account, description and amount.
   </p>
   <select
     autoFocus={true}
@@ -173,33 +180,40 @@ exports[`should render error for invalid form submission 2`] = `
       disabled={true}
       value=""
     >
-      [Select Description]
+      -- Select Account --
     </option>
     <option
       key="1"
-      value="Expense 1"
+      value="1"
     >
-      Expense 1
+      Account 1
     </option>
     <option
       key="2"
-      value="Expense 2"
+      value="2"
     >
-      Expense 2
+      Account 2
     </option>
     <option
       key="3"
-      value="Expense 3"
+      value="3"
     >
-      Expense 3
+      Account 3
     </option>
     <option
       key="4"
-      value="Expense 4"
+      value="4"
     >
-      Expense 4
+      Account 4
     </option>
   </select>
+  <input
+    className="text-input"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value=""
+  />
   <input
     className="text-input"
     onChange={[Function]}
@@ -326,33 +340,40 @@ exports[`should render expense form correctly 1`] = `
       disabled={true}
       value=""
     >
-      [Select Description]
+      -- Select Account --
     </option>
     <option
       key="1"
-      value="Expense 1"
+      value="1"
     >
-      Expense 1
+      Account 1
     </option>
     <option
       key="2"
-      value="Expense 2"
+      value="2"
     >
-      Expense 2
+      Account 2
     </option>
     <option
       key="3"
-      value="Expense 3"
+      value="3"
     >
-      Expense 3
+      Account 3
     </option>
     <option
       key="4"
-      value="Expense 4"
+      value="4"
     >
-      Expense 4
+      Account 4
     </option>
   </select>
+  <input
+    className="text-input"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value=""
+  />
   <input
     className="text-input"
     onChange={[Function]}
@@ -479,33 +500,40 @@ exports[`should render expense form with expense data 1`] = `
       disabled={true}
       value=""
     >
-      [Select Description]
+      -- Select Account --
     </option>
     <option
       key="1"
-      value="Expense 1"
+      value="1"
     >
-      Expense 1
+      Account 1
     </option>
     <option
       key="2"
-      value="Expense 2"
+      value="2"
     >
-      Expense 2
+      Account 2
     </option>
     <option
       key="3"
-      value="Expense 3"
+      value="3"
     >
-      Expense 3
+      Account 3
     </option>
     <option
       key="4"
-      value="Expense 4"
+      value="4"
     >
-      Expense 4
+      Account 4
     </option>
   </select>
+  <input
+    className="text-input"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value=""
+  />
   <input
     className="text-input"
     onChange={[Function]}
