@@ -9,10 +9,10 @@ export class AccountList extends React.Component {
       <div>
         <div className="page-header">
           <div className="content-container">
-            <h2 className="page-header__title">Expense Types</h2>
+            <h2 className="page-header__title">Accounts</h2>
             <div className="page-header__actions">
               <Link className="button" to="/accountform">
-                Add Expense Type
+                Add Account
               </Link>
             </div>
           </div>
@@ -22,9 +22,15 @@ export class AccountList extends React.Component {
             <div>Name</div>
           </div>
           <div className="list-body">
-            {this.props.accounts.map(acc => (
-              <AccountListItem key={acc.id} {...acc} />
-            ))}
+            {this.props.accounts.length === 0 ? (
+              <div className="list-item list-item--message">
+                <span>No Accounts</span>
+              </div>
+            ) : (
+              this.props.accounts.map(acc => (
+                <AccountListItem key={acc.id} {...acc} />
+              ))
+            )}
           </div>
         </div>
       </div>

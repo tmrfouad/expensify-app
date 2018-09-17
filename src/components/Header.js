@@ -12,7 +12,7 @@ export const Header = ({ startLogout }) => (
         </Link>
         <div>
           <Link className="button button--link" to="/accounts">
-            Expense Types
+            Accounts
           </Link>
           <button className="button button--link" onClick={startLogout}>
             Logout

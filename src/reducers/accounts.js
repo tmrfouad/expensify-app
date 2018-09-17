@@ -4,7 +4,7 @@ const accountsReducerDefaultState = [];
 
 export default (state = accountsReducerDefaultState, action) => {
   switch (action.type) {
-    case 'Add_ACCOUNT':
+    case 'ADD_ACCOUNT':
       return [...state, action.account];
     case 'REMOVE_ACCOUNT':
       return state.filter(({ id }) => id !== action.id);

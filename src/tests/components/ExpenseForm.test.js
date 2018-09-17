@@ -6,13 +6,10 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import accounts from '../fixtures/accounts';
 
-let wrapper, startSetAccounts;
+let wrapper;
 
 beforeEach(() => {
-  startSetAccounts = jest.fn();
-  wrapper = shallow(
-    <ExpenseForm accounts={accounts} startSetAccounts={startSetAccounts} />
-  );
+  wrapper = shallow(<ExpenseForm accounts={accounts} />);
 });
 
 test('should render expense form correctly', () => {
@@ -83,7 +80,6 @@ test('should call onSubmit prop for valid form submission', () => {
   wrapper = shallow(
     <ExpenseForm
       accounts={accounts}
-      startSetAccounts={startSetAccounts}
       onSubmit={onSubmitSpy}
       expense={expenses[0]}
     />

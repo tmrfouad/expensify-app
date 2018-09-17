@@ -30,7 +30,7 @@ test('add account', () => {
     name: 'Account 5'
   };
   const action = {
-    type: 'Add_ACCOUNT',
+    type: 'ADD_ACCOUNT',
     account: newAccount
   };
   const state = accountsReducer(accounts, action);

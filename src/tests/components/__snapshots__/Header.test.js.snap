@@ -25,7 +25,7 @@ exports[`should render Header correctly 1`] = `
           replace={false}
           to="/accounts"
         >
-          Expense Types
+          Accounts
         </Link>
         <button
           className="button button--link"
